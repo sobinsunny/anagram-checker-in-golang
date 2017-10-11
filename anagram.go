@@ -34,7 +34,7 @@ func makeKey(element string) string {
 }
 
 func main() {
-	b, _ := ioutil.ReadFile("sample.txt")
+	b, _ := ioutil.ReadFile("input_data.txt")
 
 	var input_strings string = string(b)
 	extracted_data := make(map[string]string)
@@ -43,11 +43,17 @@ func main() {
 		key_string := makeKey(element)
 		if _, ok := extracted_data[key_string]; ok {
 			extracted_data[key_string] = (extracted_data[key_string] + "','" + element)
-			fmt.Println("--Update--%x", element)
 		} else {
 			extracted_data[key_string] = element
-			fmt.Println("--Add---%x", element)
 		}
 	}
-	fmt.Println(extracted_data)
+
+	fmt.Println("********* Anagram ********")
+
+	for key, value := range extracted_data {
+		if len(key) < len(value) {
+			fmt.Println(value)
+		}
+	}
+
 }
